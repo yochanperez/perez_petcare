@@ -1,6 +1,10 @@
 import { IsString, IsNumber, IsOptional, IsDecimal } from 'class-validator';
+import { FindOperator } from 'typeorm';
+
 
 export class UpdateMascotaDto {
+
+  especieId: string | FindOperator<string> | undefined;
   @IsOptional()
   @IsString()
   nombre?: string;
@@ -16,5 +20,6 @@ export class UpdateMascotaDto {
 
   @IsOptional()
   estado_vacunado?: boolean;
+
   
 }
