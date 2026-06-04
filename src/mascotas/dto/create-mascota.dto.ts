@@ -1,18 +1,21 @@
-import { IsString, IsNumber} from 'class-validator';
+import { IsString, IsNumber, IsBoolean} from 'class-validator';
 import { FindOperator } from 'typeorm';
 
 export class CreateMascotaDto {
+    
+  @IsString()
+  especieId: string | FindOperator<string> | undefined;
+
   @IsString()
   nombre?: string;
 
-  @IsNumber()
+  @IsNumber() 
   peso_kg?: number;
 
   @IsNumber()
   edad_años?: number;
-
+  @IsBoolean()
   estado_vacunado?: boolean;
-  
-  especieId: string | FindOperator<string> | undefined;
+
     
 }

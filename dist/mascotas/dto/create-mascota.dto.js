@@ -12,13 +12,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateMascotaDto = void 0;
 const class_validator_1 = require("class-validator");
 class CreateMascotaDto {
+    especieId;
     nombre;
     peso_kg;
     edad_años;
     estado_vacunado;
-    especieId;
 }
 exports.CreateMascotaDto = CreateMascotaDto;
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", Object)
+], CreateMascotaDto.prototype, "especieId", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -31,4 +35,8 @@ __decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateMascotaDto.prototype, "edad_a\u00F1os", void 0);
+__decorate([
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], CreateMascotaDto.prototype, "estado_vacunado", void 0);
 //# sourceMappingURL=create-mascota.dto.js.map

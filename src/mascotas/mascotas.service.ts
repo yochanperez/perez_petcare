@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Mascota } from './mascota.entity';
@@ -17,18 +17,23 @@ export class MascotasService {
   ) {}
 
   async create(createMascotaDto: CreateMascotaDto) {
-    const especie = await this.especieRepository.findOne({ where: { id: createMascotaDto.especieId } });
-    if (!especie) throw new NotFoundException('Especie no encontrada');
-
-    const Mascota = this.mascotasRepository.create({
-      nombre:      createMascotaDto.nombre,
-      peso_kg:      createMascotaDto.peso_kg,
-      edad_años: createMascotaDto.edad_años ?? 0,
-      estado_vacunado:      createMascotaDto.estado_vacunado ?? true,
-      especie:     especie,
-    });
-    return this.mascotasRepository.save(Mascota);
+  if (!createMascotaDto.especieId) {
+    throw new BadRequestException('El campo especieId es obligatorio.');
   }
+
+  const especie = await this.especieRepository.findOne({ where: { id: createMascotaDto.especieId } });
+  if (!especie) throw new NotFoundException('Especie no encontrada');
+
+  const Mascota = this.mascotasRepository.create({
+    nombre:          createMascotaDto.nombre,
+    peso_kg:         createMascotaDto.peso_kg,
+    edad_años:       createMascotaDto.edad_años ?? 0,
+    estado_vacunado: createMascotaDto.estado_vacunado ?? true,
+    especie:         especie,
+  });
+  
+  return this.mascotasRepository.save(Mascota);
+}
 
   findAll() {
     return this.mascotasRepository.find();

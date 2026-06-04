@@ -22,6 +22,11 @@ exports.UpdateMascotaDto = UpdateMascotaDto;
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
+    __metadata("design:type", Object)
+], UpdateMascotaDto.prototype, "especieId", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateMascotaDto.prototype, "nombre", void 0);
 __decorate([

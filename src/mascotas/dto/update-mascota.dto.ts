@@ -3,8 +3,10 @@ import { FindOperator } from 'typeorm';
 
 
 export class UpdateMascotaDto {
-
+  @IsOptional()
+  @IsString()
   especieId: string | FindOperator<string> | undefined;
+  
   @IsOptional()
   @IsString()
   nombre?: string;

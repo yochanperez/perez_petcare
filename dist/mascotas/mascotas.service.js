@@ -26,6 +26,9 @@ let MascotasService = class MascotasService {
         this.especieRepository = especieRepository;
     }
     async create(createMascotaDto) {
+        if (!createMascotaDto.especieId) {
+            throw new common_1.BadRequestException('El campo especieId es obligatorio.');
+        }
         const especie = await this.especieRepository.findOne({ where: { id: createMascotaDto.especieId } });
         if (!especie)
             throw new common_1.NotFoundException('Especie no encontrada');
